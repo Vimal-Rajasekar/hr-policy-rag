@@ -5,6 +5,7 @@ streamlit
 langchain
 langchain-community
 langchain-google-genai
+langchain-pinecone
 
 google-generativeai
 
@@ -16,3 +17,18 @@ python-dotenv
 tqdm
 
 pydantic
+requests
+fastapi
+uvicorn
+streamlit
+langchain
+langchain-core
+langchain-community
+langchain-google-genai
+langchain-pinecone
+pinecone-client
+pypdf
+python-dotenv
+tqdm
+
+
