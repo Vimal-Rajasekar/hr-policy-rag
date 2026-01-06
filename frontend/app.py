@@ -66,11 +66,19 @@ if user_input:
 
         # Case 2: streaming text
         else:
+            CURSOR = "▌"
+
             for chunk in response.iter_content(chunk_size=1024):
                 if chunk:
                     text = chunk.decode("utf-8")
                     full_response += text
-                    placeholder.markdown(full_response)
+
+                    # show cursor while streaming
+                    placeholder.markdown(full_response + CURSOR)
+
+            # remove cursor after stream ends
+            placeholder.markdown(full_response)
+
 
 if full_response:
     st.session_state.messages.append(

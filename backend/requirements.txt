@@ -1,34 +1,38 @@
+# fastapi
+# uvicorn
+# streamlit
+
+# langchain
+# langchain-community
+# langchain-google-genai
+# langchain-pinecone
+
+# google-generativeai
+
+
+# pypdf
+
+# python-dotenv
+# tqdm
+
+# pydantic
+# requests
+# fastapi
+# uvicorn
+# streamlit
+# langchain
+# langchain-core
+# langchain-community
+# langchain-google-genai
+# langchain-pinecone
+# pinecone-client
+
+
 fastapi
 uvicorn
-streamlit
-
 langchain
-langchain-community
-langchain-google-genai
-langchain-pinecone
-
-google-generativeai
-
-pinecone
-
-pypdf
-
-python-dotenv
-tqdm
-
-pydantic
-requests
-fastapi
-uvicorn
-streamlit
-langchain
-langchain-core
-langchain-community
 langchain-google-genai
 langchain-pinecone
 pinecone-client
-pypdf
 python-dotenv
-tqdm
-
-
+pydantic
