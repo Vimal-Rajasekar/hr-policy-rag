@@ -64,8 +64,8 @@ def chat_endpoint(payload: ChatRequest):
     # ---------------------------
     intent = classify_intent(user_message)
     intent_mode = intent.get("query_type", "out_of_scope").upper()
-    logging.debug(f"Classified intent: {intent_mode}")
-    logging.debug(f"Intent details: {intent}")
+    print(f"Classified intent: {intent_mode}")
+    print(f"Intent details: {intent}")
     # ---------------------------
     # Handle Greetings (NO RAG)
     # ---------------------------
@@ -74,7 +74,12 @@ def chat_endpoint(payload: ChatRequest):
         session_manager.add_message(session_id, "human", user_message)
         session_manager.add_message(session_id, "ai", answer)
 
-        return ChatResponse(answer=answer)
+        return StreamingResponse(
+        iter([answer]),
+        media_type="text/plain"
+        )
+
+        # return ChatResponse(answer=answer)
     # --- STREAMED PATH ---
     return StreamingResponse(
         policy_stream(session_id, user_message),

@@ -102,6 +102,8 @@ class PolicyAgent:
         """
         try:
             docs = self.vectorstore.similarity_search(question, k=10)
+            print(f"Retrieved {len(docs)} documents from vector store.")
+            print("Documents:", docs[:2])
         except Exception as e:
             logger.exception(f"Retrieval failed: {e}")
             yield "I could not retrieve policy documents."
@@ -111,9 +113,9 @@ class PolicyAgent:
             yield "I could not find this information in the company policy documents."
             return
 
-        logging.debug(f"Length of retrieved docs: {len(docs)}")
+        print(f"Length of retrieved docs: {len(docs)}")
         reranked_docs = reranker.rerank(question, docs)
-        logging.debug(f"Length of reranked docs: {len(reranked_docs)}")
+        print(f"Length of reranked docs: {len(reranked_docs)}")
 
         context = "\n\n".join(doc.page_content for doc in reranked_docs)
 
