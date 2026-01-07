@@ -1,13 +1,18 @@
 FROM python:3.11-slim
 
+# Prevent Python from buffering stdout/stderr
+ENV PYTHONUNBUFFERED=1
+
 WORKDIR /app
 
-COPY requirements.txt .
+# Copy backend code
+COPY backend /app/backend
 
-RUN pip install --no-cache-dir -r requirements.txt
+# Make backend importable
+ENV PYTHONPATH=/app
 
-COPY app.py .
+# Install dependencies
+RUN pip install --no-cache-dir -r /app/backend/requirements.txt
 
-EXPOSE 8501
-
-CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+# Start FastAPI using Render's injected PORT
+CMD ["sh", "-c", "exec uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT"]
