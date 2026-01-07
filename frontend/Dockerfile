@@ -5,14 +5,14 @@ ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
-# Copy backend code
-COPY backend /app/backend
+# Copy only frontend code
+COPY . /app
 
-# Make backend importable
-ENV PYTHONPATH=/app
+# Install frontend dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Install dependencies
-RUN pip install --no-cache-dir -r /app/backend/requirements.txt
+# Set environment variable for backend URL (optional, you can override on Render)
+ENV BACKEND_URL=http://localhost:8000/chat
 
-# Start FastAPI using Render's injected PORT
-CMD ["sh", "-c", "exec uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT"]
+# Run Streamlit app
+CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
